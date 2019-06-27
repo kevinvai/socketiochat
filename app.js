@@ -15,21 +15,21 @@ io.on('connection', function (socket) {
     });
 
     socket.on('join', function (user) {
-        console.log('we receive user from frontend as: ' + user) 
+        console.log('we receive user from frontend as: ' + user)
         lobbyUsers = lobbyUsers.filter(Boolean);
-        if(lobbyUsers.includes(user)) return;
+        if (lobbyUsers.includes(user)) return;
         lobbyUsers.push(user)
         io.emit('join', lobbyUsers);
         console.log('users: ' + lobbyUsers);
     });
 
-    socket.on('logout', function(user){
+    socket.on('logout', function (user) {
         let filtered = lobbyUsers.filter((value, index, arr) => {
-            return value !== user;  
+            return value !== user;
         });
         lobbyUsers = filtered;
         console.log(user + ' loggedout');
-      });
+    });
 });
 
 http.listen(3002, function () {
